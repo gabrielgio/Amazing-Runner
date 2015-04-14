@@ -1,7 +1,34 @@
-﻿
+﻿@model List<Ranking.Models.RankModel>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "RankView";
 }
+<p>
+    <h2>Amazing Runner Rank Service</h2>
+</p>
 
-<h2>Amazing Runner Rank Service</h2>
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Score
+        </th>
+    </tr>
+
+    @foreach (Ranking.Models.RankModel item in Model)
+    {
+        <tr>
+            <th>
+                @Html.DisplayFor(modelItem => item.Name)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Score)
+            </th>
+        </tr>
+    }
+</table>
+
 
