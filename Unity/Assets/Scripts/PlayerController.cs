@@ -42,8 +42,8 @@ public class PlayerController : MonoBehaviour {
 			jump = true;
 		}
 
-		if (rb3d.velocity.x <= 0)
-			Application.LoadLevel (Application.loadedLevel);
+		//if (rb3d.velocity.x <= 0)
+			//Application.LoadLevel (Application.loadedLevel);
 	}
 	
 	void FixedUpdate()

@@ -320,6 +320,10 @@ Prefab:
       propertyPath: Player
       value: 
       objectReference: {fileID: 177392528}
+    - target: {fileID: 11493292, guid: 4a9b05058da0e47be88ac470c7026dcd, type: 2}
+      propertyPath: Progression
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4a9b05058da0e47be88ac470c7026dcd, type: 2}
   m_IsPrefabParent: 0
