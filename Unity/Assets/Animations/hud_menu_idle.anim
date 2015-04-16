@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pause_menu_in
+  m_Name: hud_menu_idle
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -19,19 +19,42 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: 564
-        inSlope: -1692
-        outSlope: -1692
+        value: 300
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
-      - time: .333333343
-        value: 0
-        inSlope: -1692
-        outSlope: -1692
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchoredPosition.y
+    path: PauseButtom
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 278
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_AnchoredPosition.x
-    path: 
+    path: RestartButtom
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 300
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchoredPosition.y
+    path: RestartButtom
     classID: 224
     script: {fileID: 0}
   m_PPtrCurves: []
@@ -46,7 +69,7 @@ AnimationClip:
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
-    m_StopTime: .333333343
+    m_StopTime: 0
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -65,19 +88,42 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: 564
-        inSlope: -1692
-        outSlope: -1692
+        value: 300
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
-      - time: .333333343
-        value: 0
-        inSlope: -1692
-        outSlope: -1692
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchoredPosition.y
+    path: PauseButtom
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 278
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_AnchoredPosition.x
-    path: 
+    path: RestartButtom
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 300
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchoredPosition.y
+    path: RestartButtom
     classID: 224
     script: {fileID: 0}
   m_EulerEditorCurves: []

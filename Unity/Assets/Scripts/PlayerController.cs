@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
 	public float jumpForce = 1000f;
 	public float heightCheck = 0.6f;
 	public float DeadY = -11;
-	
+
 	public UnityEvent OnPlayerDied;
 
 	private bool jump = false;
@@ -48,6 +48,15 @@ public class PlayerController : MonoBehaviour {
 			OnPlayerDied.Invoke();
 		}
 
+		if (rb3d.velocity.x <= 0 && GameController.Instance.CurrentState != GameState.Pause)
+			Application.LoadLevel (0);
+
+	}
+
+	public void Jump()
+	{
+		if(grounded && GameController.Instance.CurrentState == GameState.Running)
+			jump = true;
 	}
 
 	void OnDestroy()

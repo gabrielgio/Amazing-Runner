@@ -6,6 +6,8 @@ public class GroundController : MonoBehaviour {
 
 	public Transform Player;
 
+	public float DelayTime = 3;
+
 	public List<GameObject> GroundPrefabs;
 
 	public float Progression;
@@ -38,7 +40,13 @@ public class GroundController : MonoBehaviour {
 			break;
 
 		case GameState.Running:
-			game = GroundPrefabs [Random.Range(0,GroundPrefabs.Count)];
+			if(DelayTime <= 0)
+				game = GroundPrefabs [Random.Range(1,GroundPrefabs.Count)];
+			else
+			{
+				DelayTime -= Time.deltaTime;
+				game = GroundPrefabs[0];
+			}
 			break;
 		
 		default:

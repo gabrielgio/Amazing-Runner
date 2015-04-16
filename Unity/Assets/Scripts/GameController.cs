@@ -4,7 +4,15 @@ using System.Collections;
 public class GameController : MonoBehaviour {
 
 
+	private static bool IsFirstTime = true;
+
+	public Rigidbody Player;
+
 	public Animator MainMenuAnimator;
+
+	public Animator PauseAnimator;
+
+	public Animator HUDAnimator;
 
 	private static GameController _instance;
 	
@@ -18,6 +26,15 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	void Awake()
+	{
+		if (!IsFirstTime) {
+			StartGameButtonPressed();
+		}
+
+		IsFirstTime = false;
+	}
+
 	public GameState CurrentState;
 
 	public void OnPlayerDied()
@@ -28,7 +45,33 @@ public class GameController : MonoBehaviour {
 	public void StartGameButtonPressed()
 	{
 		MainMenuAnimator.SetBool ("IsHidden", true);
+		HUDAnimator.SetBool("IsHidden",false);
+
 		CurrentState = GameState.Running;
+	}
+
+	public void RestartButtonPressed()
+	{
+		Application.LoadLevel (0);
+	}
+
+	public void PauseButtonPressed()
+	{
+		if (CurrentState != GameState.Pause) 
+		{
+			Player.isKinematic = true;
+			CurrentState = GameState.Pause;
+			PauseAnimator.SetBool("IsHidden",false);
+			HUDAnimator.SetBool("IsHidden",true);
+
+		}
+		else 
+		{
+			Player.isKinematic = false;
+			CurrentState = GameState.Running;
+			PauseAnimator.SetBool("IsHidden",true);
+			HUDAnimator.SetBool("IsHidden",false);
+		}
 	}
 
 	// Use this for initialization
