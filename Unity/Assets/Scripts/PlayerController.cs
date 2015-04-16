@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour {
 
@@ -7,22 +8,23 @@ public class PlayerController : MonoBehaviour {
 	public float maxSpeed = 5f;
 	public float jumpForce = 1000f;
 	public float heightCheck = 0.6f;
+	public float DeadY = -11;
+	
+	public UnityEvent OnPlayerDied;
 
-	private float velocity;
 	private bool jump = false;
 	private bool grounded = false;
 	private Rigidbody rb3d;
-	
+
+
 	
 	// Use this for initialization
 	void Awake () 
 	{
-		
 		rb3d = GetComponent<Rigidbody>();
 		Application.CaptureScreenshot ("screemshot.png");
 	}
-	
-	// Update is called once per frame
+
 	void Update () 
 	{
 		
@@ -38,20 +40,25 @@ public class PlayerController : MonoBehaviour {
 		else
 			grounded = false;
 		
-		if (Input.GetKey (KeyCode.Space) && grounded) {
+		if (Input.GetKey (KeyCode.Space) && grounded && GameController.Instance.CurrentState == GameState.Running) {
 			jump = true;
 		}
 
-		//if (rb3d.velocity.x <= 0)
-			//Application.LoadLevel (Application.loadedLevel);
+		if (transform.position.y > DeadY) {
+			OnPlayerDied.Invoke();
+		}
+
+	}
+
+	void OnDestroy()
+	{
+		rb3d.Sleep();
 	}
 	
 	void FixedUpdate()
 	{
 		rb3d.velocity = new Vector2(Mathf.Sign (rb3d.velocity.x) * maxSpeed, rb3d.velocity.y);
-		
-		velocity = rb3d.velocity.magnitude;
-		
+
 		if (jump) {
 			rb3d.AddForce (new Vector2 (0f, jumpForce));
 			jump = false;

@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3383074}
   - 65: {fileID: 6563050}
   - 23: {fileID: 2329202}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ GameObject:
   - 33: {fileID: 3342366}
   - 65: {fileID: 6546030}
   - 23: {fileID: 2316300}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube 1
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -48,8 +48,7 @@ GameObject:
   - 65: {fileID: 6547204}
   - 23: {fileID: 2309476}
   - 54: {fileID: 5451320}
-  - 114: {fileID: 11493292}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -238,20 +237,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &11493292
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 194538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7612354757f2141c58a97754d712aa95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 0}
-  GroundPrefab: {fileID: 194538}
-  Progression: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

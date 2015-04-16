@@ -1,29 +1,56 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GroundController : MonoBehaviour {
 
 	public Transform Player;
 
-	public GameObject GroundPrefab;
+	public List<GameObject> GroundPrefabs;
 
 	public float Progression;
 
-	private bool done = false;
+	public float DistanceView;
 
-	// Use this for initialization
-	void Start () {
-	
+	private float xLastPosition;
+
+	void Awake () {
+		xLastPosition = transform.position.x;
 	}
 	
-	// Update is called once per frame
+
 	void Update () {
-		if ((transform.position.x - Player.position.x) < 10 && !done) {
-			Instantiate (GroundPrefab, new Vector3 (transform.position.x + Progression, 0, 0), new Quaternion ()).name = name;
-			done = true;
+
+
+		GameObject game = null;
+
+		switch (GameController.Instance.CurrentState) {
+		
+		case GameState.Pause:
+
+			break;
+		
+		case GameState.MainMenu:
+			game = GroundPrefabs[0];
+			break;
+
+		case GameState.Death:
+			break;
+
+		case GameState.Running:
+			game = GroundPrefabs [Random.Range(0,GroundPrefabs.Count)];
+			break;
+		
+		default:
+			game = GroundPrefabs[0];
+			break;
 		}
 
-		if ((Player.position.x - transform.position.x) > 20)
-			Destroy (this.gameObject);
+		 
+
+		if ((Player.position.x) > xLastPosition - DistanceView) {
+			xLastPosition += Progression;
+			Instantiate (game, new Vector3 (xLastPosition, transform.position.y), new Quaternion ());
+		}
 	}
 }

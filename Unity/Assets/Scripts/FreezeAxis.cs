@@ -6,7 +6,6 @@ public class FreezeAxis : MonoBehaviour {
 	public bool x;
 	public bool y;
 	public bool z;
-	
 
 	private float lastX;
 	private float lastY;
@@ -25,14 +24,15 @@ public class FreezeAxis : MonoBehaviour {
 	
 		if(!x)
 			lastX = transform.position.x;
-			
-
+		
+		
 		if(!y)
 			lastY = transform.position.y;
-			
-
+		
+		
 		if(!z)
 			lastZ = transform.position.z;
+
 			
 
 		transform.position = new Vector3(lastX, lastY,lastZ);
