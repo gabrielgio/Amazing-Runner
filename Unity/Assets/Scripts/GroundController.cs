@@ -41,7 +41,7 @@ public class GroundController : MonoBehaviour {
 
 		case GameState.Running:
 			if(DelayTime <= 0)
-				game = GroundPrefabs [Random.Range(1,GroundPrefabs.Count)];
+				game = GroundPrefabs [Random.Range(1,GroundPrefabs.Count-1)];
 			else
 			{
 				DelayTime -= Time.deltaTime;

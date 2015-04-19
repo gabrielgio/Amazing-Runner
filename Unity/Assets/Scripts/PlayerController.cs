@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Events;
+using System;
 
 public class PlayerController : MonoBehaviour {
 
@@ -48,8 +49,11 @@ public class PlayerController : MonoBehaviour {
 			OnPlayerDied.Invoke();
 		}
 
-		if (rb3d.velocity.x <= 0 && GameController.Instance.CurrentState != GameState.Pause)
+		if (rb3d.velocity.x <= 0 && GameController.Instance.CurrentState != GameState.Pause) {
+		
+			Ranking.Instance.SendRank(Guid.NewGuid().ToString(), UnityEngine.Random.Range(0,200));
 			Application.LoadLevel (0);
+		}
 
 	}
 

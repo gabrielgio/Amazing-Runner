@@ -14,6 +14,8 @@ public class GameController : MonoBehaviour {
 
 	public Animator HUDAnimator;
 
+	public Animator RankAnimator;
+
 	private static GameController _instance;
 	
 	public static GameController Instance
@@ -40,6 +42,37 @@ public class GameController : MonoBehaviour {
 	public void OnPlayerDied()
 	{
 
+	}
+
+	public void ShowRanking()
+	{
+		MainMenuAnimator.SetBool("IsHidden", true);
+		
+		PauseAnimator.SetBool("IsHidden", true);
+		
+		HUDAnimator.SetBool("IsHidden", true);
+		
+		RankAnimator.SetBool("IsHidden", false);
+	}
+
+	public void HideRanking()
+	{
+		RankAnimator.SetBool("IsHidden", true);
+
+		switch (CurrentState) 
+		{
+		case GameState.Death:
+
+			break;
+
+		case GameState.MainMenu:
+			MainMenuAnimator.SetBool("IsHidden", false);
+			break;
+
+		case GameState.Pause:
+			PauseAnimator.SetBool("IsHidden", false);
+			break;
+		}
 	}
 
 	public void StartGameButtonPressed()
