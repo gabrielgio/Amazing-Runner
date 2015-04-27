@@ -1317,6 +1317,33 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 613886248}
+--- !u!1 &625525908
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 625525909}
+  m_Layer: 0
+  m_Name: Initial Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &625525909
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 625525908}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.07999992, y: 2.01999998, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
 --- !u!1 &631228629
 GameObject:
   m_ObjectHideFlags: 0
@@ -1524,6 +1551,7 @@ GameObject:
   - 81: {fileID: 670433269}
   - 114: {fileID: 670433274}
   - 114: {fileID: 670433275}
+  - 114: {fileID: 670433276}
   m_Layer: 9
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1591,7 +1619,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 670433268}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.13999987, z: -19.6700001}
+  m_LocalPosition: {x: 0, y: 4.17999983, z: -19.6700001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1430400376}
@@ -1621,12 +1649,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0cd2f1adeb454e8ba6c2abb9e3150fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InitialSpeed: 6
   Player: {fileID: 1430400372}
+  InicialPosition: {x: -3.11999989, y: 2, z: 0}
+  Points: 0
   MainMenuAnimator: {fileID: 1199426523}
   PauseAnimator: {fileID: 1821358528}
   HUDAnimator: {fileID: 1776297639}
   RankAnimator: {fileID: 1749872573}
+  OnReload:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1110558530}
+        m_MethodName: Reload
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   CurrentState: 2
+--- !u!114 &670433276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 670433268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6086e76ed176847948ac1fc5e45b3c4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  x: 0
+  y: 0
+  z: 0
 --- !u!1 &693954328
 GameObject:
   m_ObjectHideFlags: 0
@@ -2749,6 +2811,7 @@ MonoBehaviour:
   - {fileID: 139450, guid: f12ac9aa2a9104a6584dd7d13d1ac70d, type: 2}
   - {fileID: 139128, guid: 59ece534371cd43f9837e6dc7a9cef49, type: 2}
   - {fileID: 160998, guid: 4149bd45412524cb79de458365d05364, type: 2}
+  - {fileID: 122228, guid: 8f4758678b4b340a7ab82b756e52c219, type: 2}
   Progression: 10
   DistanceView: 16
 --- !u!1 &1111370193
@@ -3563,6 +3626,8 @@ GameObject:
   - 54: {fileID: 1430400372}
   - 114: {fileID: 1430400371}
   - 114: {fileID: 1430400377}
+  - 143: {fileID: 1430400379}
+  - 114: {fileID: 1430400378}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -3576,13 +3641,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1430400370}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 818de460cffe14f2e8747593fd59a2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveForce: 365
-  maxSpeed: 20
+  maxSpeed: 6
   jumpForce: 1000
   heightCheck: .600000024
   DeadY: -11
@@ -3810,6 +3875,39 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: RankScoresEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &1430400378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1430400370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3829f5b07372c42b0a13511ea666f85f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  jumpSpeed: 20
+  gravity: 20
+  gravityForce: 6
+  airTime: 1
+--- !u!143 &1430400379
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1430400370}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1
+  m_Radius: .400000006
+  m_SlopeLimit: 45
+  m_StepOffset: .300000012
+  m_SkinWidth: 9.99999975e-05
+  m_MinMoveDistance: .00100000005
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1440896415
 GameObject:
   m_ObjectHideFlags: 0

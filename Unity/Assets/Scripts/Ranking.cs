@@ -8,14 +8,14 @@ using SimpleJSON;
 
 public class Ranking : MonoBehaviour {
 
-	private string urlScores = "http://a4l.cloudapp.net/rank/rank";
+	private string _urlScores = "http://a4l.cloudapp.net/rank/rank";
 
-	private string urlSendScore = "http://a4l.cloudapp.net/rank/sendrank?name={0}t&score={1}";
+	private string _urlSendScore = "http://a4l.cloudapp.net/rank/sendrank?name={0}t&score={1}";
+
+	private static Ranking _instance;
 
 	public RankScoresEvent OnScoreGot;
 
-	private static Ranking _instance;
-	
 	public static Ranking Instance
 	{
 		get{
@@ -33,7 +33,7 @@ public class Ranking : MonoBehaviour {
 
 	public IEnumerator SendRank(string name, int score)
 	{
-		WWW www = new WWW (string.Format (urlSendScore, name, score));
+		WWW www = new WWW (string.Format (_urlSendScore, name, score));
 		
 		yield return www;
 	}
@@ -52,7 +52,7 @@ public class Ranking : MonoBehaviour {
 
 	private IEnumerator ResquestScore()
 	{
-		WWW www = new WWW (urlScores);
+		WWW www = new WWW (_urlScores);
 		
 		yield return www;
 

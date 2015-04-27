@@ -3,43 +3,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class RankComponent : MonoBehaviour {
+public class RankComponent : MonoBehaviour 
+{
+	private List<Rank> _scores;
+
+	private Text _position;
+
+	private Text _player;
+
+	private Text _score;
 
 	[Range(0,9)]
 	public int Index;
 
-	private List<Rank> scores;
-	private Text text;
-	private Text name;
-	private Text score;
-
-
-	// Use this for initialization
 	void Awake () 
 	{
-		text = transform.GetChild(0).GetComponent<Text>();
-		name = transform.GetChild(1).GetComponent<Text>();
-		score = transform.GetChild(2).GetComponent<Text>();
+		_position = transform.GetChild(0).GetComponent<Text>();
+		_player = transform.GetChild(1).GetComponent<Text>();
+		_score = transform.GetChild(2).GetComponent<Text>();
 	}
 	
-	// Update is called once per frame
+
 	void Update () 
 	{
-		if (scores != null && Index < scores.Count) {
-			text.text = (Index + 1).ToString ();
-			name.text = scores [Index].Name;
-			score.text = scores [Index].Score.ToString ();
+		if (_scores != null && Index < _scores.Count) {
+			_position.text = (Index + 1).ToString ();
+			_player.text = _scores [Index].Name;
+			_score.text = _scores [Index].Score.ToString ();
 		} else {
-			text.text = (Index + 1).ToString ();
-			name.text = "---";
-			score.text = "---";
+			_position.text = (Index + 1).ToString ();
+			_player.text = "---";
+			_score.text = "---";
 		}
 	}
 
 
 	public void Ranking(RankScoresEvent data)
 	{
-		scores = data.Scores;
+		_scores = data.Scores;
 	}
 
 }

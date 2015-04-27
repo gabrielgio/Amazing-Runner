@@ -1,23 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
+using UnityEngine.Events;
 
-public class GameController : MonoBehaviour {
+public class GameController : MonoBehaviour 
+{
+	private static bool _IsFirstTime = true;
 
+	private static GameController _instance;
 
-	private static bool IsFirstTime = true;
+	public float InitialSpeed = 6;
 
 	public Rigidbody Player;
 
+	public Vector3 InicialPosition;
+
+	public float Points = 0;
+
+	public GameState CurrentState;
+
 	public Animator MainMenuAnimator;
-
+	
 	public Animator PauseAnimator;
-
+	
 	public Animator HUDAnimator;
-
+	
 	public Animator RankAnimator;
 
-	private static GameController _instance;
-	
+	public UnityEvent OnReload;
+
 	public static GameController Instance
 	{
 		get{
@@ -30,18 +41,34 @@ public class GameController : MonoBehaviour {
 
 	void Awake()
 	{
-		if (!IsFirstTime) {
+		if (!_IsFirstTime) {
 			StartGameButtonPressed();
 		}
 
-		IsFirstTime = false;
+		_IsFirstTime = false;
 	}
-
-	public GameState CurrentState;
 
 	public void OnPlayerDied()
 	{
+		
+	}	
 
+	public void Reload()
+	{
+		Points = 0;
+		OnReload.Invoke ();
+		GameObject.Find ("Player").GetComponent<Transform> ().position = InicialPosition.Clone ();
+	}
+
+	public void ShowMainMenu()
+	{
+		MainMenuAnimator.SetBool("IsHidden", false);
+		
+		PauseAnimator.SetBool("IsHidden", true);
+		
+		HUDAnimator.SetBool("IsHidden", true);
+		
+		RankAnimator.SetBool("IsHidden", true);
 	}
 
 	public void ShowRanking()
@@ -85,7 +112,7 @@ public class GameController : MonoBehaviour {
 
 	public void RestartButtonPressed()
 	{
-		Application.LoadLevel (0);
+		Reload ();
 	}
 
 	public void PauseButtonPressed()
@@ -107,14 +134,17 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-	// Use this for initialization
-	void Start () {
+
+	void Start ()
+	{
 
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	void Update () 
+	{
+		if (CurrentState == GameState.Running)
+			Points += Time.deltaTime;
+
 	}
 }
 

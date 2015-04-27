@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Rank {
-
+public class Rank 
+{
 	public int Id { get; set; }
 
 	public string Name { get; set; }
