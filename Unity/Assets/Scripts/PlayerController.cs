@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
 
 	void Update () 
 	{
-		
 		RaycastHit hit;
 		
 		if (Physics.Raycast (new Ray (transform.position, Vector3.down), out hit, heightCheck)) {

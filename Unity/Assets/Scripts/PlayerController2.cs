@@ -24,6 +24,8 @@ public class PlayerController2 : MonoBehaviour
 
 	public float airTime = 2f;
 
+	public float DeadY = -11;
+
 	void Start()
 	{
 		_invertGrav = gravity * airTime;
@@ -61,6 +63,9 @@ public class PlayerController2 : MonoBehaviour
 
 
 		speed += (float)(Time.deltaTime * 0.2);
+
+		if (transform.position.y <= DeadY)
+			GameController.Instance.OnPlayerDied ();
 	}
 
 }

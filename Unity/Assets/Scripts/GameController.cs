@@ -13,6 +13,8 @@ public class GameController : MonoBehaviour
 
 	public Rigidbody Player;
 
+	public float YDeath = -11;
+
 	public Vector3 InicialPosition;
 
 	public float Points = 0;
@@ -26,6 +28,8 @@ public class GameController : MonoBehaviour
 	public Animator HUDAnimator;
 	
 	public Animator RankAnimator;
+
+	public Animator PostAnimator;
 
 	public UnityEvent OnReload;
 
@@ -50,19 +54,56 @@ public class GameController : MonoBehaviour
 
 	public void OnPlayerDied()
 	{
-		
+		if (CurrentState != GameState.Death) 
+		{
+			CurrentState = GameState.Death;	
+			ShowPostMenu();
+		}
 	}	
 
 	public void Reload()
 	{
 		Points = 0;
+		CurrentState = GameState.Running;
+		OnReload.Invoke ();
 		OnReload.Invoke ();
 		GameObject.Find ("Player").GetComponent<Transform> ().position = InicialPosition.Clone ();
+		ShowHUD ();
+	}
+
+
+	public void ShowHUD()
+	{
+		MainMenuAnimator.SetBool("IsHidden", true);
+		
+		PostAnimator.SetBool("IsHidden", true);
+		
+		PauseAnimator.SetBool("IsHidden", true);
+		
+		HUDAnimator.SetBool("IsHidden", false);
+		
+		RankAnimator.SetBool("IsHidden", true);
+	}
+
+
+	public void ShowPostMenu()
+	{
+		MainMenuAnimator.SetBool("IsHidden", true);
+		
+		PostAnimator.SetBool("IsHidden", false);
+		
+		PauseAnimator.SetBool("IsHidden", true);
+		
+		HUDAnimator.SetBool("IsHidden", true);
+		
+		RankAnimator.SetBool("IsHidden", true);
 	}
 
 	public void ShowMainMenu()
 	{
 		MainMenuAnimator.SetBool("IsHidden", false);
+
+		PostAnimator.SetBool("IsHidden", true);
 		
 		PauseAnimator.SetBool("IsHidden", true);
 		
@@ -80,6 +121,8 @@ public class GameController : MonoBehaviour
 		HUDAnimator.SetBool("IsHidden", true);
 		
 		RankAnimator.SetBool("IsHidden", false);
+
+		PostAnimator.SetBool("IsHidden", true);
 	}
 
 	public void HideRanking()
@@ -89,7 +132,7 @@ public class GameController : MonoBehaviour
 		switch (CurrentState) 
 		{
 		case GameState.Death:
-
+			PostAnimator.SetBool("IsHidden", false);
 			break;
 
 		case GameState.MainMenu:
@@ -142,8 +185,10 @@ public class GameController : MonoBehaviour
 
 	void Update () 
 	{
-		if (CurrentState == GameState.Running)
+		if (CurrentState == GameState.Running) 
+		{
 			Points += Time.deltaTime;
+		}
 
 	}
 }
