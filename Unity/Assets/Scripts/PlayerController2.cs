@@ -39,19 +39,16 @@ public class PlayerController2 : MonoBehaviour
 
 		_moveDirection = transform.TransformDirection (_moveDirection);
 		_moveDirection *= speed;    
-		if (_controller.isGrounded) 
-		{
+		if (_controller.isGrounded) {
 			_forceY = 0;	
 			_invertGrav = gravity * airTime;
 
-			if ((Input.GetKey (KeyCode.Space) || Input.GetMouseButtonDown (0)) && GameController.Instance.CurrentState == GameState.Running)
-			{
+			if ((Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown (0)) && GameController.Instance.CurrentState == GameState.Running) {
 				_forceY = jumpSpeed;
 			}
 		}
 
-		if ((Input.GetKey (KeyCode.Space) || Input.GetMouseButtonDown (0)) && _forceY != 0 && GameController.Instance.CurrentState == GameState.Running) 
-		{
+		if ((Input.GetKey (KeyCode.Space) || Input.GetMouseButton (0)) && _forceY != 0 && GameController.Instance.CurrentState == GameState.Running) {
 			_invertGrav -= Time.deltaTime;
 			_forceY += _invertGrav * Time.deltaTime;
 		}
@@ -61,11 +58,18 @@ public class PlayerController2 : MonoBehaviour
 		_controller.Move (_moveDirection * Time.deltaTime);
 
 
-
 		speed += (float)(Time.deltaTime * 0.2);
+		         
 
 		if (transform.position.y <= DeadY)
 			GameController.Instance.OnPlayerDied ();
+	}
+
+	void OnCollisionEnter(Collision col)
+	{
+		if (col.collider.tag == "DeathBox") {
+			GameController.Instance.OnPlayerDied();
+		}
 	}
 
 }

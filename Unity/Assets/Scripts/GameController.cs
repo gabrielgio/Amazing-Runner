@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine.Events;
+using System;
 
 public class GameController : MonoBehaviour 
 {
@@ -11,13 +12,13 @@ public class GameController : MonoBehaviour
 
 	public float InitialSpeed = 6;
 
-	public Rigidbody Player;
-
 	public float YDeath = -11;
 
 	public Vector3 InicialPosition;
 
 	public float Points = 0;
+
+	public PlayerController2 Player;
 
 	public GameState CurrentState;
 
@@ -30,6 +31,8 @@ public class GameController : MonoBehaviour
 	public Animator RankAnimator;
 
 	public Animator PostAnimator;
+
+	public Animator PlayerAnimator;
 
 	public UnityEvent OnReload;
 
@@ -56,6 +59,8 @@ public class GameController : MonoBehaviour
 	{
 		if (CurrentState != GameState.Death) 
 		{
+			Player.transform.position -= Vector3.back;
+			PlayerAnimator.SetBool ("IsFaded", true);
 			CurrentState = GameState.Death;	
 			ShowPostMenu();
 		}
@@ -63,6 +68,11 @@ public class GameController : MonoBehaviour
 
 	public void Reload()
 	{
+		Player.transform.position -= Vector3.back;
+		PlayerAnimator.SetBool ("IsFaded", false);
+		Player.speed = 10;
+		Ranking.Instance.PostRank (Guid.NewGuid ().ToString().ToUpper(), (int)Points);
+		Ranking.Instance.GetRank ();
 		Points = 0;
 		CurrentState = GameState.Running;
 		OnReload.Invoke ();
@@ -162,7 +172,6 @@ public class GameController : MonoBehaviour
 	{
 		if (CurrentState != GameState.Pause) 
 		{
-			Player.isKinematic = true;
 			CurrentState = GameState.Pause;
 			PauseAnimator.SetBool("IsHidden",false);
 			HUDAnimator.SetBool("IsHidden",true);
@@ -170,7 +179,6 @@ public class GameController : MonoBehaviour
 		}
 		else 
 		{
-			Player.isKinematic = false;
 			CurrentState = GameState.Running;
 			PauseAnimator.SetBool("IsHidden",true);
 			HUDAnimator.SetBool("IsHidden",false);

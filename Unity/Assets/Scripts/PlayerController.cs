@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
 
 		if (_rb3d.velocity.x <= 0 && GameController.Instance.CurrentState != GameState.Pause) {
 		
-			Ranking.Instance.SendRank(Guid.NewGuid().ToString(), UnityEngine.Random.Range(0,200));
+
 			Application.LoadLevel (0);
 		}
 

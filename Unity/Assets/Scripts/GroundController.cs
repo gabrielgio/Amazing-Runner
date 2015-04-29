@@ -56,8 +56,6 @@ public class GroundController : MonoBehaviour
 				break;
 		}
 
-
-
 		if ((Player.position.x) > _xLastPosition - DistanceView) {
 			_xLastPosition += Progression;
 			Instantiate (game, new Vector3 (_xLastPosition, transform.position.y), new Quaternion ());

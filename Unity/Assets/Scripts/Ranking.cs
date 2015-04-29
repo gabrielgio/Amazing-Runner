@@ -31,12 +31,19 @@ public class Ranking : MonoBehaviour {
 		StartCoroutine (ResquestScore());
 	}
 
-	public IEnumerator SendRank(string name, int score)
+	public void PostRank(string name, int score)
+	{
+		StartCoroutine (SendRank (name, score));
+	}
+
+	private IEnumerator SendRank(string name, int score)
 	{
 		WWW www = new WWW (string.Format (_urlSendScore, name, score));
 		
 		yield return www;
 	}
+
+
 
 
 	// Use this for initialization
@@ -52,6 +59,7 @@ public class Ranking : MonoBehaviour {
 
 	private IEnumerator ResquestScore()
 	{
+
 		WWW www = new WWW (_urlScores);
 		
 		yield return www;
