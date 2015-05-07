@@ -10,7 +10,7 @@ public class Ranking : MonoBehaviour {
 
 	private string _urlScores = "http://a4l.cloudapp.net/rank/rank";
 
-	private string _urlSendScore = "http://a4l.cloudapp.net/rank/sendrank?name={0}t&score={1}";
+	private string _urlSendScore = "http://a4l.cloudapp.net/rank/sendrank?name={0}&score={1}";
 
 	private static Ranking _instance;
 

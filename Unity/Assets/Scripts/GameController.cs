@@ -36,6 +36,8 @@ public class GameController : MonoBehaviour
 
 	public UnityEvent OnReload;
 
+	public String Name;
+
 	public static GameController Instance
 	{
 		get{
@@ -59,6 +61,7 @@ public class GameController : MonoBehaviour
 	{
 		if (CurrentState != GameState.Death) 
 		{
+			Ranking.Instance.PostRank (GameController.Instance.Name, (int)Points);
 			Player.transform.position -= Vector3.back;
 			PlayerAnimator.SetBool ("IsFaded", true);
 			CurrentState = GameState.Death;	
@@ -71,7 +74,6 @@ public class GameController : MonoBehaviour
 		Player.transform.position -= Vector3.back;
 		PlayerAnimator.SetBool ("IsFaded", false);
 		Player.speed = 10;
-		Ranking.Instance.PostRank (Guid.NewGuid ().ToString().ToUpper(), (int)Points);
 		Ranking.Instance.GetRank ();
 		Points = 0;
 		CurrentState = GameState.Running;
@@ -111,6 +113,10 @@ public class GameController : MonoBehaviour
 
 	public void ShowMainMenu()
 	{
+		Reload ();
+
+		CurrentState = GameState.MainMenu;
+
 		MainMenuAnimator.SetBool("IsHidden", false);
 
 		PostAnimator.SetBool("IsHidden", true);

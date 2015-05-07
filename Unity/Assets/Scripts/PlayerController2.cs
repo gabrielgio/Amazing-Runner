@@ -58,7 +58,8 @@ public class PlayerController2 : MonoBehaviour
 		_controller.Move (_moveDirection * Time.deltaTime);
 
 
-		speed += (float)(Time.deltaTime * 0.2);
+		if (GameController.Instance.CurrentState == GameState.Running)
+			speed += (float)(Time.deltaTime * 0.2);
 		         
 
 		if (transform.position.y <= DeadY)
