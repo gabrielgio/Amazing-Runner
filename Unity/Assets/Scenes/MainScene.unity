@@ -1155,11 +1155,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Piece: {fileID: 170200, guid: 026dfac4f89c342abbd9bbc55f245e1f, type: 2}
-  Frequency: 35
-  Initial: {x: -37.2999992, y: -30}
+  SecondPiece: {fileID: 175672, guid: 1c7031ab7d764459a827f73771136c82, type: 2}
+  Player: {fileID: 1430400376}
+  Type: 1
+  Frequency: 26
+  Initial: {x: -50, y: 50}
   Final: {x: 100, y: -60}
-  ZVelues: 64000000500000005a000000
+  ZVelues: 460000004b00000050000000550000005a0000005f00000064000000690000006e00000073000000780000007d000000
   YValues: e2ffffffd8ffffffecffffff
+  Rows: 5
+  View: 120
 --- !u!4 &511483435
 Transform:
   m_ObjectHideFlags: 0
