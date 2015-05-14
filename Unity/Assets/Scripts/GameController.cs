@@ -3,12 +3,17 @@ using System.Collections;
 using System.Linq;
 using UnityEngine.Events;
 using System;
+using System.IO;
+using UnityEngine.UI;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class GameController : MonoBehaviour 
 {
 	private static bool _IsFirstTime = true;
 
 	private static GameController _instance;
+
+	private const string FILENAME = "filename.txt";
 
 	public float InitialSpeed = 6;
 
@@ -36,7 +41,7 @@ public class GameController : MonoBehaviour
 
 	public UnityEvent OnReload;
 
-	public String Name;
+	public InputField Name;
 
 	public static GameController Instance
 	{
@@ -55,19 +60,44 @@ public class GameController : MonoBehaviour
 		}
 
 		_IsFirstTime = false;
+
+		LoadName ();
 	}
 
 	public void OnPlayerDied()
 	{
 		if (CurrentState != GameState.Death) 
 		{
-			Ranking.Instance.PostRank (GameController.Instance.Name, (int)Points);
+			Ranking.Instance.PostRank (GameController.Instance.Name.text, (int)Points);
+			Ranking.Instance.GetRank();
 			Player.transform.position -= Vector3.back;
 			PlayerAnimator.SetBool ("IsFaded", true);
 			CurrentState = GameState.Death;	
 			ShowPostMenu();
 		}
-	}	
+	}
+
+	public void LoadName()
+	{
+		if (File.Exists (string.Format ("{0}/{1}", Application.persistentDataPath, FILENAME))) 
+		{
+			BinaryFormatter bf = new BinaryFormatter ();
+			FileStream fs = File.Open(string.Format ("{0}/{1}", Application.persistentDataPath, FILENAME), FileMode.OpenOrCreate);
+			Name.text = (string)bf.Deserialize(fs);
+			fs.Close();	
+			Debug.LogFormat ("Load {0}", Name.text);
+		}
+	}
+
+	public void NameChangedEdit(string name)
+	{
+		Debug.LogFormat ("Save {0}", Name.text);
+
+		BinaryFormatter bf = new BinaryFormatter ();
+		FileStream fs = File.Open (string.Format ("{0}/{1}", Application.persistentDataPath, FILENAME), FileMode.OpenOrCreate);
+		bf.Serialize (fs, Name.text);
+		fs.Close ();
+	}
 
 	public void Reload()
 	{

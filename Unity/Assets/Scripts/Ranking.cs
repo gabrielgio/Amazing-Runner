@@ -43,9 +43,6 @@ public class Ranking : MonoBehaviour {
 		yield return www;
 	}
 
-
-
-
 	// Use this for initialization
 	void Start () {
 		StartCoroutine (ResquestScore());	
