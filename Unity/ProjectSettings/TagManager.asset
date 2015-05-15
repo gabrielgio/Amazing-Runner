@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - DeathBox
+  - Bonus
+  - Trap
   layers:
   - Default
   - TransparentFX

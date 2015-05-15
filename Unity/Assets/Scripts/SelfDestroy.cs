@@ -13,4 +13,10 @@ public class SelfDestroy : MonoBehaviour
 		GameController.Instance.OnReload.RemoveListener (Self);
 		Destroy (gameObject);
 	}
+
+	void OnDestroy ()
+	{
+		GameController.Instance.OnReload.RemoveListener (Self);
+	}
+
 }

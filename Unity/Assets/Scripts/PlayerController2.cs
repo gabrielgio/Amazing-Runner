@@ -68,9 +68,20 @@ public class PlayerController2 : MonoBehaviour
 
 	void OnCollisionEnter(Collision col)
 	{
-		if (col.collider.tag == "DeathBox") {
-			GameController.Instance.OnPlayerDied();
+		if (col.collider.tag == "DeathBox") 
+		{
+			if(GameController.Instance.Lives == 0)
+				GameController.Instance.OnPlayerDied ();
+			else
+				GameController.Instance.Lives --;
+		}
+		else if (col.collider.tag == "Bonus") 
+		{
+			GameController.Instance.Lives++;
+		}
+		else if (col.collider.tag == "Trap") 
+		{
+			TrapManager.Instance.TrapIt();
 		}
 	}
-
 }

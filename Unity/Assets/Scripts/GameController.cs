@@ -39,9 +39,15 @@ public class GameController : MonoBehaviour
 
 	public Animator PlayerAnimator;
 
+	public Animator AboutAnimator;
+
+	public Animator CameraAnimator;
+
 	public UnityEvent OnReload;
 
 	public InputField Name;
+
+	public int Lives = 3;
 
 	public static GameController Instance
 	{
@@ -55,7 +61,10 @@ public class GameController : MonoBehaviour
 
 	void Awake()
 	{
-		if (!_IsFirstTime) {
+		_instance = this;
+
+		if (!_IsFirstTime) 
+		{
 			StartGameButtonPressed();
 		}
 
@@ -72,7 +81,8 @@ public class GameController : MonoBehaviour
 			Ranking.Instance.GetRank();
 			Player.transform.position -= Vector3.back;
 			PlayerAnimator.SetBool ("IsFaded", true);
-			CurrentState = GameState.Death;	
+			CurrentState = GameState.Death;
+			Lives = 3;
 			ShowPostMenu();
 		}
 	}
@@ -85,7 +95,6 @@ public class GameController : MonoBehaviour
 			FileStream fs = File.Open(string.Format ("{0}/{1}", Application.persistentDataPath, FILENAME), FileMode.OpenOrCreate);
 			Name.text = (string)bf.Deserialize(fs);
 			fs.Close();	
-			Debug.LogFormat ("Load {0}", Name.text);
 		}
 	}
 
@@ -106,6 +115,7 @@ public class GameController : MonoBehaviour
 		Player.speed = 10;
 		Ranking.Instance.GetRank ();
 		Points = 0;
+		Lives = 3;
 		CurrentState = GameState.Running;
 		OnReload.Invoke ();
 		OnReload.Invoke ();
@@ -127,6 +137,19 @@ public class GameController : MonoBehaviour
 		RankAnimator.SetBool("IsHidden", true);
 	}
 
+	public void ShowAboutMenu()
+	{
+		MainMenuAnimator.SetBool("IsHidden", true);
+		AboutAnimator.SetBool("IsHidden", false);
+		CameraAnimator.SetBool("Zoom", true);
+    }
+
+	public void HideAboutMenu()
+	{
+		MainMenuAnimator.SetBool("IsHidden", false);
+		AboutAnimator.SetBool("IsHidden", true);
+		CameraAnimator.SetBool("Zoom", false);
+    }
 
 	public void ShowPostMenu()
 	{
@@ -169,11 +192,14 @@ public class GameController : MonoBehaviour
 		RankAnimator.SetBool("IsHidden", false);
 
 		PostAnimator.SetBool("IsHidden", true);
+
+		CameraAnimator.SetBool("Zoom", true);
 	}
 
 	public void HideRanking()
 	{
 		RankAnimator.SetBool("IsHidden", true);
+		CameraAnimator.SetBool("Zoom", false);
 
 		switch (CurrentState) 
 		{
@@ -208,6 +234,7 @@ public class GameController : MonoBehaviour
 	{
 		if (CurrentState != GameState.Pause) 
 		{
+			Time.timeScale = 0;
 			CurrentState = GameState.Pause;
 			PauseAnimator.SetBool("IsHidden",false);
 			HUDAnimator.SetBool("IsHidden",true);
@@ -215,6 +242,7 @@ public class GameController : MonoBehaviour
 		}
 		else 
 		{
+			Time.timeScale = 1;
 			CurrentState = GameState.Running;
 			PauseAnimator.SetBool("IsHidden",true);
 			HUDAnimator.SetBool("IsHidden",false);

@@ -21,7 +21,6 @@ public class BloomColor : MonoBehaviour
 	public void Start()
 	{
 		value = Random.Range (0, 1f);
-		Debug.Log (value);
 	}
 
 	void Update () 
