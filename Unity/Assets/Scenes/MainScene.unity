@@ -1283,6 +1283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainCamera: {fileID: 670433272}
+  CurrentMode: 0
 --- !u!4 &485416455
 Transform:
   m_ObjectHideFlags: 0
@@ -4088,6 +4089,7 @@ MonoBehaviour:
   - {fileID: 174960, guid: f12ac9aa2a9104a6584dd7d13d1ac70d, type: 2}
   - {fileID: 116664, guid: 59ece534371cd43f9837e6dc7a9cef49, type: 2}
   - {fileID: 146692, guid: 4149bd45412524cb79de458365d05364, type: 2}
+  - {fileID: 190796, guid: 8f4758678b4b340a7ab82b756e52c219, type: 2}
   Progression: 15
   DistanceView: 15
 --- !u!1 &1111370193
@@ -5858,7 +5860,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter you name here
+  m_Text: Enter your name here
 --- !u!222 &1689339571
 CanvasRenderer:
   m_ObjectHideFlags: 0

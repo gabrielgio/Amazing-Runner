@@ -12,11 +12,13 @@ public class TrapManager : MonoBehaviour
 
 	private float _delay;
 
+	private float value = 0;
+
 	private BackIt Back;
 
 	public Camera MainCamera;
 
-		
+	public Mode CurrentMode = Mode.Presentation;
 
 	public static TrapManager Instance
 	{
@@ -46,7 +48,14 @@ public class TrapManager : MonoBehaviour
 		if (_inTrap)
 			return;
 
-		float value = Random.Range(0, 1f);
+		if (CurrentMode == Mode.Free)
+			value = Random.Range (0, 1f);
+		else {
+			if(value > 1)
+				value = 0;
+			value += 0.25f;	
+
+		}
 
 		if (value <= 0.25) {
 
@@ -101,4 +110,10 @@ public class TrapManager : MonoBehaviour
 		MainCamera.GetComponent<Blur>().enabled = false;
 		Back = null;
 	}
+}
+
+public enum Mode
+{
+	Presentation,
+	Free
 }
